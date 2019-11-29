@@ -3,28 +3,28 @@
     <head>
         <title>{{ site.title }}</title>
 
-        <if PRODUCTION>
+        {{ if PRODUCTION }}
             <link rel="stylesheet" href="https://assets.simse.io/theme/style.css">
 
-            <else>
-
-            </else>
-        </if>
+            {{ else }}
+                TEST
+            {{ endelse }}
+        {{ endif }}
     </head>
 
     <body>
-        <if site.featuredImage>
+        {{ if site.featuredImage }}
             <h1>Yuh</h1>
 
-            <else>
-                <h2>Boomer time!!</h2>
-            </else>
-        </if>
+            {{ else }}
+                TEST
+            {{ endelse }}
+        {{ endif }}
 
-        <for post in posts>
+        {{ for post in site.posts }}
             <div>
                 <h2>{{ post.title }}</h2>
             </div>
-        </for>
+        {{ endfor }}
     </body>
 </html>
