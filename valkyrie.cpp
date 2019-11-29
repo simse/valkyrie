@@ -2,9 +2,13 @@
 #include <list>
 
 
-
+#include "utils/trim.hpp"
 #include "nodes/node.hpp"
 #include "nodes/text.hpp"
+#include "nodes/show_statement.hpp"
+#include "nodes/if_statement.hpp"
+#include "nodes/for_statement.hpp"
+
 
 using namespace std;
 

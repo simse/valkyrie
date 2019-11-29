@@ -1,9 +1,9 @@
 build:
-	- g++ valkyrie.cpp -llexbor -o valkyrie
+	- g++ valkyrie.cpp -o valkyrie
 
 .PHONY: build
 
 run:
-	- g++ valkyrie.cpp -llexbor -o tmp && ./tmp && rm tmp
+	- g++ valkyrie.cpp -o tmp && ./tmp && rm tmp
 
 .PHONY: run
