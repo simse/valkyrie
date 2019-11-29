@@ -1,15 +1,22 @@
 #include <iostream>
-#include <list>
-#include <unordered_map>
+#include "node.hpp"
 
+#pragma once
 
 using namespace std;
 
-class ShowNode: public Node {
-    protected:
-        string content;
-    public:
-        string render() {
-            return content;
-        }
+class ShowNode : public Node
+{
+protected:
+    string content;
+
+public:
+    ShowNode(string input)
+    {
+        content = input;
+    }
+    string render() override
+    {
+        return content;
+    }
 };

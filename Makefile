@@ -4,6 +4,6 @@ build:
 .PHONY: build
 
 run:
-	- g++ valkyrie.cpp -o tmp && ./tmp && rm tmp
+	- g++ valkyrie.cpp -I libraries/*.cpp nodes/*.cpp -o tmp && ./tmp && rm tmp
 
 .PHONY: run
