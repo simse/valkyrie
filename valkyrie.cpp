@@ -1,15 +1,10 @@
 #include <iostream>
 #include <list>
 
+#include "nodes/node.hpp"
+
 using namespace std;
 
-class Node {
-    public:
-        bool selfClosing;
-        string openingTag;
-        string closingTag;
-        list<Node> children;
-};
 
 int main() {
     cout << "Valkyrie 1.0" << endl;
@@ -24,6 +19,8 @@ int main() {
 
     cout << test.openingTag << endl;
     cout << test.children.front().closingTag << endl;
+
+    cout << test.render() << endl;
 
     return 0;
 }
