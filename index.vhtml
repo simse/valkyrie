@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><[show site.title]></title>
+    </head>
+
+    <body>
+        <[if site.featuredImage]>
+            <h1>Yuh</h1>
+
+            <[else]>
+                <h2>Boomer time!!</h2>
+            <[/else]>
+        <[/if]>
+
+        <[for post in posts]>
+            <div>
+                <h2><[show post.title]></h2>
+            </div>
+        <[/for]>
+    </body>
+</html>
