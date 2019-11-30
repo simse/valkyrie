@@ -30,6 +30,7 @@ int main()
     cout << test.children.front().closingTag << endl;*/
 
     /*cout << test.render() << endl;*/
+    cout << "\n\n\nOUTPUT:\n";
     cout << test.output << endl;
 
     return 0;

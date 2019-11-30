@@ -16,6 +16,10 @@
         {{ if site.featuredImage }}
             <h1>Yuh</h1>
 
+            {{ if site.darkTheme }}
+                <h2>You know that shit ain't racist!</h2>
+            {{ endif }}
+
             {{ else }}
                 TEST
             {{ endelse }}

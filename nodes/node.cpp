@@ -7,6 +7,7 @@
 #include "node.hpp"
 #include "text.hpp"
 #include "show_statement.hpp"
+#include "if_statement.hpp"
 
 using namespace std;
 
@@ -20,9 +21,11 @@ void Node::parse(string input)
         {"VHTML_INTERPRETING", false},
         {"CURLY_JUST_CLOSED", false},
         {"TERMINATING", false}};
-    unordered_map<string, string> tmp = {};
+    unordered_map<string, string> tmp = {
+        {"CATCHING_FOR", ""},
+        {"CATCHING_FOR_STREAM", ""}};
     unordered_map<string, int> runtime = {
-        {"DEPTH", 0}};
+        {"DEPTH", -1}};
 
     int length = input.length();
     int cursor = -1;
@@ -42,9 +45,13 @@ void Node::parse(string input)
         }
 
         /* Stream all text outside vHTML into Text Nodes */
-        if (!flags["VHTML_INTERPRETING"] && cursor < length)
+        if (!flags["VHTML_INTERPRETING"] && cursor < length && runtime["DEPTH"] < 0)
         {
             stream.push_back(current_char);
+        }
+        else if(runtime["DEPTH"] >= 0 && cursor < length)
+        {
+            tmp["CATCHING_FOR_STREAM"].push_back(current_char);
         }
         else
         {
@@ -66,7 +73,7 @@ void Node::parse(string input)
         /* vHTML extension detection */
         if (!flags["CURLY_OPENING"] && current_char == '{')
         {
-            
+
             flags["CURLY_OPENING"] = true;
             flags["VHTML_INTERPRETING"] = true;
             continue;
@@ -110,29 +117,76 @@ void Node::parse(string input)
             /*cout << tmp["CURRENT_STATEMENT"] << endl;*/
 
             // Determine keyword
-            size_t spaces = count(tmp["CURRENT_STATEMENT"].begin(), tmp["CURRENT_STATEMENT"].end(), ' ');
-            /*cout << spaces << endl;*/
-
-            if (spaces == 0)
+            /*size_t spaces = count(tmp["CURRENT_STATEMENT"].begin(), tmp["CURRENT_STATEMENT"].end(), ' ');
+            cout << spaces << endl;*/
+            if (tmp["CURRENT_STATEMENT"].rfind("if", 0) == 0)
             {
-                if (tmp["CURRENT_STATEMENT"] != "else")
-                {
-                    tmp["CURRENT_KEYWORD"] = "show";
-                }
+                tmp["CURRENT_KEYWORD"] = "if";
+            }
+            else if (tmp["CURRENT_STATEMENT"].rfind("else", 0) == 0)
+            {
+                tmp["CURRENT_KEYWORD"] = "else";
+            }
+            else if (tmp["CURRENT_STATEMENT"].rfind("endif", 0) == 0)
+            {
+                tmp["CURRENT_KEYWORD"] = "endif";
+            }
+            else if (tmp["CURRENT_STATEMENT"].rfind("endelse", 0) == 0)
+            {
+                tmp["CURRENT_KEYWORD"] = "endelse";
+            }
+            else if (tmp["CURRENT_STATEMENT"].rfind("for", 0) == 0)
+            {
+                tmp["CURRENT_KEYWORD"] = "for";
+            }
+            else if (tmp["CURRENT_STATEMENT"].rfind("endfor", 0) == 0)
+            {
+                tmp["CURRENT_KEYWORD"] = "endfor";
+            }
+            else
+            {
+                tmp["CURRENT_KEYWORD"] = "show";
             }
 
-            if (tmp["CURRENT_KEYWORD"] == "test")
-            {
-                cout << "Hello world!" << endl;
-            }
-
+            /* Take action on keyword */
             if (tmp["CURRENT_KEYWORD"] == "show")
             {
                 /*cout << "{{show}} = " << tmp["CURRENT_STATEMENT"] << endl;*/
                 ShowNode tmp_show(tmp["CURRENT_STATEMENT"]);
                 output += tmp_show.render();
             }
-            cout << tmp["CURRENT_KEYWORD"] << endl;
+
+            /* Handle if-statements */
+            if (tmp["CURRENT_KEYWORD"] == "if")
+            {
+                /* Depth of 0 indicates outer-most statement */
+                runtime["DEPTH"]++;
+
+                if(runtime["DEPTH"] == 0) {
+                    tmp["CATCHING_FOR"] = tmp["CURRENT_STATEMENT"];
+                }
+            }
+            else if (tmp["CURRENT_KEYWORD"] == "endif")
+            {
+                runtime["DEPTH"]--;
+
+                /* Detect if outer statement closed */
+                if (runtime["DEPTH"] == -1)
+                {
+                    // TODO: Dynamically remove {{ endif }} tag
+                    tmp["CATCHING_FOR_STREAM"].erase(tmp["CATCHING_FOR_STREAM"].length()-11, 11);
+                    
+                    /* Debug */
+                    /*cout << "IF statement just closed!" << endl;
+                    cout << tmp["CATCHING_FOR_STREAM"] << endl;*/
+
+                    IfNode tmp_if(trim(tmp["CATCHING_FOR"]), tmp["CATCHING_FOR_STREAM"]);
+                    output += tmp_if.render();
+
+                    /* Clear out temporary stream */
+                    tmp["CATCHING_FOR_STREAM"] = "";
+                }
+            }
         }
     }
 }
