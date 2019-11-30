@@ -25,10 +25,12 @@ string IfNode::render()
 {
     if(evaluateCondition()) {
         Node tmp;
+        tmp.setContext(context);
         tmp.parse(statementContent);
         return tmp.output;
     } else {
         Node tmp;
+        tmp.setContext(context);
         tmp.parse(elseContent);
         return tmp.output;
     }

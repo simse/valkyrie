@@ -17,6 +17,8 @@ public:
     }
     string render() override
     {
-        return content;
+        cout << context.context << endl;
+        /*return "";*/
+        return context.access(content);
     }
 };

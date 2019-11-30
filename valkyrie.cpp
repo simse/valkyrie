@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 
+#include "libraries/json.hpp"
 #include "nodes/node.hpp"
+#include "core/context.hpp"
 
 using namespace std;
 
@@ -24,7 +26,12 @@ int main()
         myfile.close();
     }
 
+    Context context;
+    context.loadFile("context.json");
+    /*context.access("site.title");*/
+
     Node test;
+    test.setContext(context);
     test.parse(all);
 
     /*cout << test.openingTag << endl;

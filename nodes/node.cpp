@@ -11,6 +11,10 @@
 
 using namespace std;
 
+void Node::setContext(Context input) {
+    context = input;
+}
+
 void Node::parse(string input)
 {
     unordered_map<string, bool> flags = {
@@ -148,15 +152,16 @@ void Node::parse(string input)
             }
 
             /* Take action on keyword */
-            if (tmp["CURRENT_KEYWORD"] == "show")
+            if (tmp["CURRENT_KEYWORD"] == "show" && runtime["DEPTH"] == -1)
             {
                 /*cout << "{{show}} = " << tmp["CURRENT_STATEMENT"] << endl;*/
                 ShowNode tmp_show(tmp["CURRENT_STATEMENT"]);
+                tmp_show.setContext(context);
                 output += tmp_show.render();
             }
 
             /* Handle if-statements */
-            if (tmp["CURRENT_KEYWORD"] == "if")
+            if (tmp["CURRENT_KEYWORD"] == "if" || tmp["CURRENT_KEYWORD"] == "for")
             {
                 /* Depth of 0 indicates outer-most statement */
                 runtime["DEPTH"]++;
@@ -165,12 +170,12 @@ void Node::parse(string input)
                     tmp["CATCHING_FOR"] = tmp["CURRENT_STATEMENT"];
                 }
             }
-            else if (tmp["CURRENT_KEYWORD"] == "endif")
+            else if (tmp["CURRENT_KEYWORD"] == "endif" || tmp["CURRENT_KEYWORD"] == "endfor")
             {
                 runtime["DEPTH"]--;
 
-                /* Detect if outer statement closed */
-                if (runtime["DEPTH"] == -1)
+                /* Detect if outer IF statement closed */
+                if (runtime["DEPTH"] == -1 && tmp["CATCHING_FOR"].rfind("if", 0) == 0)
                 {
                     // TODO: Dynamically remove {{ endif }} tag
                     tmp["CATCHING_FOR_STREAM"].erase(tmp["CATCHING_FOR_STREAM"].length()-11, 11);
@@ -180,7 +185,25 @@ void Node::parse(string input)
                     cout << tmp["CATCHING_FOR_STREAM"] << endl;*/
 
                     IfNode tmp_if(trim(tmp["CATCHING_FOR"]), trim(tmp["CATCHING_FOR_STREAM"]));
+                    tmp_if.setContext(context);
                     output += tmp_if.render();
+
+                    /* Clear out temporary stream */
+                    tmp["CATCHING_FOR_STREAM"] = "";
+                }
+
+                /* Detect if outer FOR statement closed */
+                if (runtime["DEPTH"] == -1 && tmp["CATCHING_FOR"].rfind("for", 0) == 0)
+                {
+                    // TODO: Dynamically remove {{ endif }} tag
+                    tmp["CATCHING_FOR_STREAM"].erase(tmp["CATCHING_FOR_STREAM"].length()-12, 12);
+                    
+                    /* Debug */
+                    /*cout << "IF statement just closed!" << endl;
+                    cout << tmp["CATCHING_FOR_STREAM"] << endl;*/
+                    /*
+                    IfNode tmp_if(trim(tmp["CATCHING_FOR"]), trim(tmp["CATCHING_FOR_STREAM"]));
+                    output += tmp_if.render();*/
 
                     /* Clear out temporary stream */
                     tmp["CATCHING_FOR_STREAM"] = "";

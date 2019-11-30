@@ -1,9 +1,9 @@
 build:
-	- g++ valkyrie.cpp -o valkyrie
+	- g++ valkyrie.cpp -I libraries/*.cpp nodes/*.cpp core/*.cpp -o valkyrie
 
 .PHONY: build
 
 run:
-	- g++ valkyrie.cpp -I libraries/*.cpp nodes/*.cpp -o tmp && ./tmp && rm tmp
+	- g++ valkyrie.cpp -I libraries/*.cpp nodes/*.cpp core/*.cpp -o tmp && ./tmp && rm tmp
 
 .PHONY: run

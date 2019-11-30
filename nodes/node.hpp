@@ -2,6 +2,7 @@
 #include <list>
 #include <unordered_map>
 #include <algorithm>
+#include "../core/context.hpp"
 
 #pragma once
 
@@ -14,11 +15,12 @@ public:
     string openingTag;
     string closingTag;
     string output;
-    unordered_map<string, string> context;
+    Context context;
 
     virtual string render() {
         return output;
     };
 
+    void setContext(Context input);
     void parse(string input);
 };
