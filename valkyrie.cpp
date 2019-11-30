@@ -19,6 +19,7 @@ int main()
         {
             cout << line << '\n';
             all += line;
+            all += '\n';
         }
         myfile.close();
     }

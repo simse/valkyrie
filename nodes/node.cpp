@@ -35,7 +35,6 @@ void Node::parse(string input)
     while (cursor++ < length)
     {
         char current_char = input[cursor];
-        //cout << current_char << endl;
 
         if (flags["CURLY_JUST_CLOSED"])
         {
@@ -180,7 +179,7 @@ void Node::parse(string input)
                     /*cout << "IF statement just closed!" << endl;
                     cout << tmp["CATCHING_FOR_STREAM"] << endl;*/
 
-                    IfNode tmp_if(trim(tmp["CATCHING_FOR"]), tmp["CATCHING_FOR_STREAM"]);
+                    IfNode tmp_if(trim(tmp["CATCHING_FOR"]), trim(tmp["CATCHING_FOR_STREAM"]));
                     output += tmp_if.render();
 
                     /* Clear out temporary stream */

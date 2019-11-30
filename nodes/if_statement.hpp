@@ -17,6 +17,9 @@ public:
     {
         condition = statement;
         statementContent = stream;
+        parse();
     }
+    bool evaluateCondition();
     string render() override;
+    void parse();
 };
