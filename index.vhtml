@@ -25,6 +25,10 @@
             {{ endelse }}
         {{ endif }}
 
+        {{ if (true && false || (false || site.darkTheme)) }}
+            <h2>Light theme</h2>
+        {{ endif }}
+
         {{ for post in site.posts }}
             <div>
                 <h2>{{ post.title }}</h2>

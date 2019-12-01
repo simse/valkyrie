@@ -26,7 +26,7 @@ public:
         statementContent = stream;
         parse();
     }
-    bool evaluateCondition();
+    bool evaluateCondition(string input);
     string render() override;
     void parse();
 };
