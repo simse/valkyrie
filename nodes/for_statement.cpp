@@ -23,7 +23,6 @@ string ForNode::render()
 
     for (auto &el : loop.items())
     {
-        std::cout << "key: " << el.key() << ", value:" << el.value() << '\n';
         Context childContext;
         json childContextJson;
         childContextJson[matches[1]] = el.value();

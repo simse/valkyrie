@@ -1,7 +1,10 @@
 #include <iostream>
 #include <fstream>
 
-#include "libraries/json.hpp"
+#include "includes/spdlog/spdlog.h"
+
+#include "core/constants.hpp"
+#include "includes/json.hpp"
 #include "nodes/node.hpp"
 #include "core/context.hpp"
 
@@ -9,7 +12,7 @@ using namespace std;
 
 int main()
 {
-    cout << "Valkyrie 1.0" << endl;
+    spdlog::info("Valkyrie {}", valkyrie::VERSION);
 
     string all;
     string line;
@@ -19,7 +22,7 @@ int main()
     {
         while (getline(myfile, line))
         {
-            cout << line << '\n';
+            /*cout << line << '\n';*/
             all += line;
             all += '\n';
         }
@@ -38,8 +41,8 @@ int main()
     cout << test.children.front().closingTag << endl;*/
 
     /*cout << test.render() << endl;*/
-    cout << "\n\n\nOUTPUT:\n";
-    cout << test.output << endl;
+    /*cout << "\n\n\nOUTPUT:\n";*/
+    /*cout << test.output << endl;*/
 
     return 0;
 }

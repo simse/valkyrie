@@ -11,7 +11,7 @@ using namespace std;
 
 void IfNode::parse()
 {
-    int elsePos = statementContent.find("{{ else }}");
+    unsigned int elsePos = statementContent.find("{{ else }}");
     if (elsePos != string::npos)
     {
         hasElse = true;
@@ -71,6 +71,8 @@ vector<string> IfNode::splitFragment(string fragment, string split)
         string fragment1 = trim(fragment.substr(0, splitPos));
         string fragment2 = trim(fragment.substr(splitPos + 2, fragment.length()));
         return vector<string>{fragment1, fragment2};
+    } else {
+        return vector<string>{};
     }
 }
 
@@ -190,7 +192,7 @@ bool IfNode::evaluateCondition(string input)
     while (input.find('(') != string::npos &&
            input.find(')') != string::npos)
     {
-        int cursor = 0;
+        unsigned int cursor = 0;
         int depth = 0;
         int startingPos = 0;
         int endPos = 0;
@@ -269,5 +271,7 @@ string IfNode::render()
         tmp.setContext(context);
         tmp.parse(elseContent);
         return tmp.output;
+    } else {
+        return "";
     }
 }
