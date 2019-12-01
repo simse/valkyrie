@@ -8,6 +8,7 @@
 #include "text.hpp"
 #include "show_statement.hpp"
 #include "if_statement.hpp"
+#include "for_statement.hpp"
 
 using namespace std;
 
@@ -201,9 +202,10 @@ void Node::parse(string input)
                     /* Debug */
                     /*cout << "IF statement just closed!" << endl;
                     cout << tmp["CATCHING_FOR_STREAM"] << endl;*/
-                    /*
-                    IfNode tmp_if(trim(tmp["CATCHING_FOR"]), trim(tmp["CATCHING_FOR_STREAM"]));
-                    output += tmp_if.render();*/
+
+                    ForNode tmp_for(trim(tmp["CATCHING_FOR"]), trim(tmp["CATCHING_FOR_STREAM"]));
+                    tmp_for.setContext(context);
+                    output += tmp_for.render();
 
                     /* Clear out temporary stream */
                     tmp["CATCHING_FOR_STREAM"] = "";

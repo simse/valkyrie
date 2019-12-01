@@ -1,4 +1,4 @@
-# Foobar
+# Valkyrie
 
 Valkyrie is a static site generator written in C++, optimized for quick build speed to save valuable compute time.
 

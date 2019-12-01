@@ -29,7 +29,7 @@
             <h2>Light theme</h2>
         {{ endif }}
 
-        {{ for post in site.posts }}
+        {{ for post in posts }}
             <div>
                 <h2>{{ post.title }}</h2>
             </div>
