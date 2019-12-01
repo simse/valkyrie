@@ -2,3 +2,4 @@
 valkyrie
 CMakeFiles
 CMakeCache.txt
+*.gch
