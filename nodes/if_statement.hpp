@@ -12,6 +12,13 @@ protected:
     string statementContent;
     string elseContent;
     bool hasElse;
+    bool isEqual(json fragment1, json fragment2);
+    bool isLessThan(json fragment1, json fragment2);
+    bool isGreaterThan(json fragment1, json fragment2);
+    bool isLessThanOrEqual(json fragment1, json fragment2);
+    bool isGreaterThanOrEqual(json fragment1, json fragment2);
+    bool evaluateFragment(string fragment);
+    vector<string> splitFragment(string fragment, string split);
 public:
     IfNode(string statement, string stream)
     {

@@ -3,7 +3,7 @@
     <head>
         <title>{{ site.title }}</title>
 
-        {{ if PRODUCTION }}
+        {{ if number >= smallerNumber }}
             <link rel="stylesheet" href="https://assets.simse.io/theme/style.css">
 
             {{ else }}
@@ -13,7 +13,7 @@
     </head>
 
     <body>
-        {{ if site.featuredImage }}
+        {{ if site.featuredImage && site.darkTheme }}
             <h1>{{ site.title }}</h1>
 
             {{ if site.darkTheme }}

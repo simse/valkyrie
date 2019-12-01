@@ -3,9 +3,11 @@
     "context": {
         "site": {
             "title": "Simon's Blog",
-            "darkMode": true,
+            "darkTheme": true,
             "subtitle": "Just another blog"
         },
+        "number": 500,
+        "smallerNumber": 500,
         "posts": [
             {
                 "title": "Just another blog post, really",
