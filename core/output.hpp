@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <ctime>
 
+#pragma once
+
 namespace valkyrie
 {
 const std::string RED = "\033[31m";
@@ -17,6 +19,7 @@ const std::string RESET = "\033[0m";
 const std::string BOLD = "\033[1m";
 const std::string UNDERLINE = "\033[4m";
 const std::string INVERSE = "\033[7m";
+const std::string BG_RED = "\u001b[41m";
 
 class Output
 {
@@ -32,20 +35,28 @@ protected:
 public:
     void info(std::string input)
     {
+        std::cout << "[" << currentTime() << "]" << CYAN << " INFO" << RESET << "    :: " << input << std::endl;
+    }
 
-        std::cout << "[" << currentTime() << "]" << CYAN << " INFO" << RESET << " :: " << input << std::endl;
+    void success(std::string input)
+    {
+        std::cout << "[" << currentTime() << "]" << GREEN << " SUCCESS" << RESET << " :: " << input << std::endl;
     }
 
     void warning(std::string input)
     {
-
         std::cout << "[" << currentTime() << "]" << YELLOW << " WARNING" << RESET << " :: " << input << std::endl;
     }
 
     void error(std::string input)
     {
+        std::cout << "[" << currentTime() << "]" << RED << " ERROR" << RESET << "   :: " << input << std::endl;
+    }
 
-        std::cout << "[" << currentTime() << "]" << RED << " ERROR" << RESET << " :: " << input << std::endl;
+    void fatal(std::string input)
+    {
+        std::cout << "[" << currentTime() << "] " << BG_RED << "FATAL" << RESET << "   :: " << input << std::endl;
+        exit(EXIT_FAILURE);
     }
 };
 } // namespace valkyrie

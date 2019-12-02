@@ -3,19 +3,20 @@
 #include <unordered_map>
 #include <algorithm>
 #include "../core/context.hpp"
+#include "../core/output.hpp"
 
 #pragma once
 
-using namespace std;
 
 class Node
 {
 public:
     bool selfClosing;
-    string openingTag;
-    string closingTag;
-    string output;
+    std::string openingTag;
+    std::string closingTag;
+    std::string output;
     Context context;
+    valkyrie::Output console;
 
     virtual string render() {
         return output;

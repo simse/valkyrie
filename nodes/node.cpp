@@ -152,6 +152,8 @@ void Node::parse(string input)
                 tmp["CURRENT_KEYWORD"] = "show";
             }
 
+            console.info("Interpreting vHTML: " + tmp["CURRENT_KEYWORD"]);
+
             /* Take action on keyword */
             if (tmp["CURRENT_KEYWORD"] == "show" && runtime["DEPTH"] == -1)
             {
@@ -180,10 +182,6 @@ void Node::parse(string input)
                 {
                     // TODO: Dynamically remove {{ endif }} tag
                     tmp["CATCHING_FOR_STREAM"].erase(tmp["CATCHING_FOR_STREAM"].length()-11, 11);
-                    
-                    /* Debug */
-                    /*cout << "IF statement just closed!" << endl;
-                    cout << tmp["CATCHING_FOR_STREAM"] << endl;*/
 
                     IfNode tmp_if(trim(tmp["CATCHING_FOR"]), trim(tmp["CATCHING_FOR_STREAM"]));
                     tmp_if.setContext(context);
@@ -198,10 +196,6 @@ void Node::parse(string input)
                 {
                     // TODO: Dynamically remove {{ endif }} tag
                     tmp["CATCHING_FOR_STREAM"].erase(tmp["CATCHING_FOR_STREAM"].length()-12, 12);
-                    
-                    /* Debug */
-                    /*cout << "IF statement just closed!" << endl;
-                    cout << tmp["CATCHING_FOR_STREAM"] << endl;*/
 
                     ForNode tmp_for(trim(tmp["CATCHING_FOR"]), trim(tmp["CATCHING_FOR_STREAM"]));
                     tmp_for.setContext(context);
