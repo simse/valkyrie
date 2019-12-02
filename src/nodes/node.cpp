@@ -3,12 +3,12 @@
 #include <unordered_map>
 #include <algorithm>
 
-#include "../include/trim.hpp"
-#include "../include/node.hpp"
-#include "../include/text.hpp"
-#include "../include/show_statement.hpp"
-#include "../include/if_statement.hpp"
-#include "../include/for_statement.hpp"
+#include "../include/utils/trim.hpp"
+#include "../include/nodes/node.hpp"
+#include "../include/nodes/text.hpp"
+#include "../include/nodes/show_statement.hpp"
+#include "../include/nodes/if_statement.hpp"
+#include "../include/nodes/for_statement.hpp"
 
 using namespace std;
 

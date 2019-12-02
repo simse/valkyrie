@@ -4,7 +4,7 @@ project(valkyrie)
 
 include_directories(include)
 
-file(GLOB SOURCES "src/*.cpp")
+file(GLOB SOURCES "src/**/*.cpp")
 add_executable(valkyrie valkyrie.cpp pch.cpp valkyrie.hpp ${SOURCES})
 
 target_include_directories(valkyrie 

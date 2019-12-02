@@ -3,8 +3,8 @@
 #include <sstream>
 #include <string>
 
-#include "../include/json.hpp"
-#include "../include/context.hpp"
+#include "../include/utils/json.hpp"
+#include "../include/core/context.hpp"
 
 using namespace std;
 using namespace nlohmann;
