@@ -2,7 +2,7 @@
 #include <list>
 #include <unordered_map>
 
-#include "text.hpp"
+#include "../include/text.hpp"
 
 TextNode::TextNode(string input) {
     content = input;

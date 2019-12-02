@@ -2,8 +2,8 @@
 #include <list>
 #include <unordered_map>
 #include <algorithm>
-#include "../core/context.hpp"
-#include "../core/output.hpp"
+#include "context.hpp"
+#include "output.hpp"
 
 #pragma once
 

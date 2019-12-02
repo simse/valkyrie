@@ -3,9 +3,9 @@
 #include <list>
 #include <vector>
 #include <unordered_map>
-#include "node.hpp"
-#include "if_statement.hpp"
-#include "../utils/trim.hpp"
+#include "../include/node.hpp"
+#include "../include/if_statement.hpp"
+#include "../include/trim.hpp"
 
 using namespace std;
 

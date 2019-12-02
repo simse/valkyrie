@@ -1,0 +1,40 @@
+@for post in posts
+@path /blog/{{ slugify(post.title) }}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ site.title }}</title>
+
+        {{ if number >= smallerNumber }}
+            <link rel="stylesheet" href="https://assets.simse.io/theme/style.css">
+
+            {{ else }}
+                TEST
+            {{ endelse }}
+        {{ endif }}
+    </head>
+
+    <body>
+        {{ if site.featuredImage && site.darkTheme }}
+            <h1>{{ site.title }}</h1>
+
+            {{ if site.darkTheme }}
+                <h2>You know that shit ain't racist!</h2>
+            {{ endif }}
+
+            {{ else }}
+                TEST
+            {{ endelse }}
+        {{ endif }}
+
+        {{ if (true && false || (false || site.darkTheme)) }}
+            <h2>Light theme</h2>
+        {{ endif }}
+
+        {{ for post in posts }}
+            <div>
+                <h2>{{ slugify(post.title) }}</h2>
+            </div>
+        {{ endfor }}
+    </body>
+</html>

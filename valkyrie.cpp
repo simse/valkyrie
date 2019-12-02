@@ -10,11 +10,11 @@
 #include <iostream>
 #include <fstream>
 
-#include "core/output.hpp"
-#include "core/constants.hpp"
-#include "includes/json.hpp"
-#include "nodes/node.hpp"
-#include "core/context.hpp"
+#include "include/output.hpp"
+#include "include/constants.hpp"
+#include "include/json.hpp"
+#include "include/node.hpp"
+#include "include/context.hpp"
 
 using namespace std;
 

@@ -1,8 +1,8 @@
 #include <iostream>
 #include <regex>
-#include "../core/context.hpp"
-#include "node.hpp"
-#include "for_statement.hpp"
+#include "../include/context.hpp"
+#include "../include/node.hpp"
+#include "../include/for_statement.hpp"
 
 using namespace std;
 
