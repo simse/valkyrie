@@ -5,3 +5,4 @@ CMakeCache.txt
 *.gch
 cmake_install.cmake
 valkyrie_pch
+Makefile
