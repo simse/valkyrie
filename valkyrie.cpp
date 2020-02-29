@@ -13,6 +13,7 @@
 #include "include/core/output.hpp"
 #include "include/core/constants.hpp"
 #include "include/utils/json.hpp"
+#include "include/utils/args.hpp"
 #include "include/nodes/node.hpp"
 #include "include/core/context.hpp"
 
@@ -23,6 +24,13 @@ int main(int argc, char **argv)
     /* Prepare to ouput to console */
     valkyrie::Output output;
     output.info("Loading Valkyrie " + valkyrie::VERSION);
+
+    /* Parse input parameters */
+    cxxopts::Options options("Valkyrie", "Crazy fast C++ static site generator");
+    options.add_options()("d,debug", "Enable debugging")("t,template", "File name", cxxopts::value<std::string>());
+    auto result = options.parse(argc, argv);
+
+    cout << result["t"].as<string>() << endl;
 
     output.info("Loading input template...");
     string all;
@@ -63,7 +71,6 @@ int main(int argc, char **argv)
     /*cout << test.render() << endl;*/
     /*cout << "\n\n\nOUTPUT:\n";*/
     /*cout << test.output << endl;*/
-
 
     return 0;
 }

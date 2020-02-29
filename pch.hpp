@@ -1,2 +1,10 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <ctime>
+#include <sstream>
+#include <iomanip>
+#include <regex>
+#include <list>
+#include <vector>
+#include <unordered_map>

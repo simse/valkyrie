@@ -33,9 +33,14 @@ protected:
     }
 
 public:
+    void debug(std::string input)
+    {
+        std::cout << "[" << currentTime() << "]" << MAGENTA << " DEBUG" << RESET << "   :: " << input << std::endl;
+    }
+
     void info(std::string input)
     {
-        std::cout << "[" << currentTime() << "]" << CYAN << " INFO" << RESET << "    :: " << input << std::endl;
+        std::cout << "[" << currentTime() << "]" << BLUE << " INFO" << RESET << "    :: " << input << std::endl;
     }
 
     void success(std::string input)
